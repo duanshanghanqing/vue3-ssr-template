@@ -3,7 +3,7 @@ const http = require("http");
 const app = require("./app");
 
 const server = http.createServer(app);
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 function onListening() {
   console.log(chalk.green(`Server started at http://localhost:${port}`));

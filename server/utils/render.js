@@ -4,14 +4,14 @@ const { errorHandler } = require("./errorHandler");
 
 const isProd = process.env.NODE_ENV === "production";
 
-// 内存缓存
+// memory cache
 const microCache = new LRU({
   max: 1000,
-  maxAge: 20000 // 重要提示：条目在 20 秒后过期。
+  maxAge: 20000 // Important: the entry will expire in 20 seconds.
 });
 const isCacheable = req => {
-  // 实现逻辑为，检查请求是否是用户特定(user-specific)。
-  // 只有非用户特定(non-user-specific)页面才会缓存
+  // The implementation logic is to check whether the request is user specific.
+  // Only non user specific pages are cached
   return true
 }
 
@@ -19,7 +19,7 @@ async function render(bundleRenderer, context, req, res) {
   const now = Date.now();
   res.setHeader("Content-Type", "text/html");
 
-  // 优先读缓存
+  // Read first cache
   const cacheable = isCacheable(req);
   if (cacheable) {
     const html = microCache.get(req.url);
@@ -52,7 +52,7 @@ async function render(bundleRenderer, context, req, res) {
     `.trim();
 
     res.send(html);
-    // 缓存设置
+    // Cache set
     if (cacheable) {
       microCache.set(req.url, html)
     }

@@ -25,5 +25,3 @@ const createHttp = (option = {}) => {
 }
 
 export const $dogCeo = createHttp({ baseURL: 'https://dog.ceo/api' });
-
-export const $ompweb = createHttp({ baseURL: '/omp-web' });
