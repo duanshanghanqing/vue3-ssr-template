@@ -17,7 +17,7 @@ export default async (context: any) => {
     await router.isReady();
 
 
-    // 服务端获取数据，存在 store 中
+    // The server obtains the data and stores it in the store
     const matchedComponents = router.currentRoute.value.matched
       .map((record) => Object.values(record.components))
       .flat();
@@ -31,15 +31,15 @@ export default async (context: any) => {
     // A preFetch hook dispatches a store action and returns a Promise,
     // which is resolved when the action is complete and store state has been
     // updated.
-    // 服务端获取数据，然后注入到前端
-    // asyncData 方法返回 Promise 对象
+    // The server gets the data and injects it into the front end
+    // asyncData return Promise
     await Promise.all(
       matchedComponents.map((component: any) => component.asyncData && component.asyncData({ route: router.currentRoute, store }))
     );
     context.state = store.state;
     
     
-    // 服务端设置 页面标题
+    // Set page title on server
     const pageComponent: any = matchedComponents[matchedComponents.length - 1];
     if (pageComponent.title) {
       if (typeof pageComponent.title === 'function') {
