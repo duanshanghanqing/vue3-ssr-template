@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1 class="mb-4 text-2xl font-semibold text-gray-900">
-      Vue 3 Server Side Rendering1
+      Vue 3 Server Side Rendering
     </h1>
     <img :src="dogInfo.message" class="dog"/>
     <app-counter />
