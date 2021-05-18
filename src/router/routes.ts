@@ -26,6 +26,5 @@ export const routes = [
     path: "/store",
     name: "Store",
     component: Store,
-    meta: { layout: "Store" },
   },
 ];
